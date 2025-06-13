@@ -1,0 +1,34 @@
+# Todos los archivos de texto con finales de línea LF
+* text=auto eol=lf
+
+# Archivos específicos de código y configuración
+*.ts     text eol=lf
+*.js     text eol=lf
+*.json   text eol=lf
+*.yml    text eol=lf
+*.yaml   text eol=lf
+*.md     text eol=lf
+*.html   text eol=lf
+*.css    text eol=lf
+*.scss   text eol=lf
+*.sh     text eol=lf
+*.env    text eol=lf
+*.gitignore text eol=lf
+
+# pnpm y lockfiles
+pnpm-lock.yaml text eol=lf
+
+# No normalizar binarios ni imágenes
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.woff    binary
+*.woff2   binary
+*.ttf     binary
+*.eot     binary
+*.pdf     binary
+
+# Evitar cambios innecesarios en archivos ya existentes
+*.svg     text eol=lf
