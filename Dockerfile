@@ -1,0 +1,18 @@
+FROM node:22.16.0-alpine
+
+# gestor de paquetes pnpm
+RUN npm install -g pnpm
+
+WORKDIR /usr/src/app
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
+
+COPY . .
+
+# Necesario para Nest con --watch
+RUN pnpm add -D ts-node-dev
+
+EXPOSE 3000
+
+CMD ["pnpm", "run", "start:dev"]
