@@ -2,11 +2,12 @@
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
-  "compilerOptions": {
-    "deleteOutDir": true
-  },
   "watchOptions": {
     "poll": true,
-    "interval": 100
+    "interval": 500,
+    "ignored": ["node_modules", "dist", "coverage"]
+  },
+  "compilerOptions": {
+    "deleteOutDir": true
   }
 }
