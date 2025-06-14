@@ -7,17 +7,17 @@
 
 ## Docker
 
-## Construir y ejecutar en modo desarrollo
+### Construir y ejecutar en modo desarrollo
 
 ```bash
-docker-compose -f docker-compose.dev.yml up --build
+docker-compose -f docker-compose.dev.yml up --build -d
 ```
 
 
 ### Ejecutar en modo desarrollo con imagen preconstruida
 
 ```bash
-docker-compose -f docker-compose.dev.yml up
+docker-compose -f docker-compose.dev.yml up -d
 ```
 
 ## Project setup

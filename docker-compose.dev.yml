@@ -8,10 +8,7 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "3000:3000"
+      - "${PORT:-3000}:${PORT:-3000}"
     environment:
       - NODE_ENV=development
-      
-    # Esto ayuda con el hot reload en algunos sistemas
-    stdin_open: true
-    tty: true
+      - PORT=${PORT:-3000}
