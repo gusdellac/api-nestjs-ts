@@ -1,4 +1,17 @@
 services:
+  mysql:
+    image: mysql:8.4
+    container_name: mysql_server
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  
+      MYSQL_DATABASE: ${MYSQL_DATABASE}         
+      MYSQL_USER: ${MYSQL_USER}                  
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}    
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./dev_db_data:/var/lib/mysql
   nest-app:
     container_name: nestjs-dev
     build:
@@ -6,9 +19,16 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - /usr/src/app/node_modules # Volumen anónimo para node_modules
+      - /usr/src/app/.pnpm-store  # Volumen anónimo para pnpm store
     ports:
       - "${PORT:-3000}:${PORT:-3000}"
     environment:
-      - NODE_ENV=development
-      - PORT=${PORT:-3000}
+      NODE_ENV: development
+      PORT: ${PORT:-3000}
+      MYSQL_HOST: ${MYSQL_HOST}  
+      MYSQL_PORT: ${MYSQL_PORT}  
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  
+      MYSQL_DATABASE: ${MYSQL_DATABASE}         
+      MYSQL_USER: ${MYSQL_USER}                  
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}    
