@@ -1,0 +1,36 @@
+{
+  "name": "NestJS + MySQL Dev",
+  "dockerComposeFile": ["../docker-compose.dev.yml"],
+  "service": "nest-app",
+  "workspaceFolder": "/usr/src/app",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "firsttris.vscode-jest-runner",
+        "formulahendry.vscode-mysql",
+        "mikestead.dotenv",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens"  
+      ]
+    }
+  },
+
+  "postCreateCommand": "pnpm install",
+  "forwardPorts": [3001, 3307],
+  
+  // configuraciones para git
+  "mounts": [
+    "source=${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind",
+    "source=${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+  ],
+
+  "containerEnv": {
+    "DOCKER_HOST": "tcp://host.docker.internal:2375"
+  },
+
+  // Asegura que las claves ssh tengan permisos correctos dentro del contenedor
+  "remoteUser": "root"
+}

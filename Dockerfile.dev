@@ -1,5 +1,8 @@
 FROM node:22.16.0-alpine
 
+# Instalar git y openssh para claves SSH
+RUN apk add --no-cache git openssh
+
 # Instalar pnpm y Nest CLI globalmente
 RUN npm install -g pnpm @nestjs/cli
 
