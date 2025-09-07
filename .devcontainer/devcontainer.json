@@ -14,7 +14,15 @@
         "mikestead.dotenv",
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens"  
-      ]
+      ],
+      "settings": {
+        "git.enabled": true,
+        "git.autoRepositoryDetection": "openEditors",
+        "git.ignoreMissingGitWarning": true,
+        // evitar que VS Code sobreescriba la configuración de Git
+        "git.allowNoVerifyCommit": false,
+        "remote.containers.gitConfig": false
+      }
     }
   },
 
@@ -23,8 +31,10 @@
   
   // configuraciones para git
   "mounts": [
-    "source=${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind",
-    "source=${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
+    // Agregar mount para credenciales de git
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.git-credentials,target=/root/.git-credentials,type=bind"
   ],
 
   "containerEnv": {
@@ -32,5 +42,8 @@
   },
 
   // Asegura que las claves ssh tengan permisos correctos dentro del contenedor
-  "remoteUser": "root"
+  "remoteUser": "root",
+
+  // configuración para el workspace
+  "workspaceMount": "source=${localWorkspaceFolder},target=/usr/src/app,type=bind,consistency=cached"
 }

@@ -21,16 +21,22 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules # Volumen anónimo para node_modules
       - /usr/src/app/.pnpm-store  # Volumen anónimo para pnpm store
+      # Montar el socket de Docker
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "${PORT:-3000}:${PORT:-3000}"
     environment:
       NODE_ENV: development
       PORT: ${PORT:-3000}
-      MYSQL_HOST: ${MYSQL_HOST:-localhost}  
+      MYSQL_HOST: ${MYSQL_HOST:-mysql}  
       MYSQL_PORT: ${MYSQL_PORT:-3306}  
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-appdb}
       MYSQL_USER: ${MYSQL_USER:-appuser}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-apppass}
+      # Variables para Docker dentro del contenedor
+      DOCKER_HOST: unix:///var/run/docker.sock
     depends_on:
       - mysql    
+    # Agregar privilegios para acceder a Docker
+    privileged: true
