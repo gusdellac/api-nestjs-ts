@@ -21,7 +21,7 @@ const database = process.env.MYSQL_DATABASE;
       password: password,
       database: database,
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: true, // no usar en produccion
     }),
   ],
   controllers: [],
