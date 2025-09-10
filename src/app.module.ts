@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsModule } from './cats/cats.module';
+import { BreedsModule } from './breeds/breeds.module';
 
 const host = process.env.MYSQL_HOST;
 const port = process.env.MYSQL_PORT
@@ -12,7 +13,6 @@ const database = process.env.MYSQL_DATABASE;
 
 @Module({
   imports: [
-    CatsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: host,
@@ -23,6 +23,8 @@ const database = process.env.MYSQL_DATABASE;
       autoLoadEntities: true,
       synchronize: true, // no usar en produccion
     }),
+    BreedsModule,
+    CatsModule,
   ],
   controllers: [],
   providers: [],

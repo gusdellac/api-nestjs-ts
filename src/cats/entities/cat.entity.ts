@@ -1,4 +1,5 @@
-import { Column, DeleteDateColumn, Entity } from 'typeorm';
+import { Breed } from 'src/breeds/entities/breed.entity';
+import { Column, DeleteDateColumn, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Cat {
@@ -11,10 +12,12 @@ export class Cat {
   @Column()
   age: number;
 
-  @Column()
-  breed: string;
-
   // eliminacion logica de la fila
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @ManyToOne(() => Breed, (breed) => breed.id, {
+    eager: true, //para que traiga la raza al hacer un findOne
+  })
+  breed: Breed;
 }
