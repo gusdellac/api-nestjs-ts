@@ -13,7 +13,9 @@
         "formulahendry.vscode-mysql",
         "mikestead.dotenv",
         "ms-azuretools.vscode-docker",
-        "eamodio.gitlens"  
+        "eamodio.gitlens",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"  
       ],
       "settings": {
         "git.enabled": true,
@@ -34,7 +36,9 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind",
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
     // Agregar mount para credenciales de git
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.git-credentials,target=/root/.git-credentials,type=bind"
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.git-credentials,target=/root/.git-credentials,type=bind",
+    // Agregar mount para credenciales de github copilot
+    "source=${localEnv:HOME}${localEnv:APPDATA}/Code/User/globalStorage/github.copilot,target=/root/.vscode-server/data/User/globalStorage/github.copilot,type=bind"
   ],
 
   "containerEnv": {
