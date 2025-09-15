@@ -1,22 +1,26 @@
-import { Cat } from 'src/cats/entities/cat.entity';
 import {
   Column,
   DeleteDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity()
-export class Breed {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column()
   name: string;
 
-  @OneToMany(() => Cat, (cat) => cat.breed)
-  cats: [];
+  @Column({ unique: true, nullable: false })
+  email: string;
+
+  @Column({ nullable: false })
+  password: string;
+
+  @Column({ default: 'user' })
+  rol: string;
 
   @DeleteDateColumn()
   deletedAt: Date;

@@ -10,5 +10,6 @@ import { BreedsService } from 'src/breeds/breeds.service';
   imports: [TypeOrmModule.forFeature([Cat]), BreedsModule],
   controllers: [CatsController],
   providers: [CatsService, BreedsService],
+  exports: [],
 })
 export class CatsModule {}
