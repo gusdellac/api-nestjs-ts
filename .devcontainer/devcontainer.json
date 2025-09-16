@@ -21,9 +21,13 @@
         "git.enabled": true,
         "git.autoRepositoryDetection": "openEditors",
         "git.ignoreMissingGitWarning": true,
+        
         // evitar que VS Code sobreescriba la configuración de Git
         "git.allowNoVerifyCommit": false,
-        "remote.containers.gitConfig": false
+        "remote.containers.gitConfig": false,
+
+        // activar pack de íconos NestJS
+        "material-icon-theme.activeIconPack": "nest"
       }
     }
   },

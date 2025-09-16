@@ -34,6 +34,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-appdb}
       MYSQL_USER: ${MYSQL_USER:-appuser}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-apppass}
+      JWT_SECRET: ${JWT_SECRET:-yourSecretKey}
       # Variables para Docker dentro del contenedor
       DOCKER_HOST: unix:///var/run/docker.sock
     depends_on:
