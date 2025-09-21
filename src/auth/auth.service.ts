@@ -21,15 +21,20 @@ export class AuthService {
     if (existingUser) {
       throw new BadRequestException('User with this email already exists');
     }
-    return await this.usersService.create({
+    const res = await this.usersService.create({
       name,
       email,
       password: await brcyptjs.hash(password, 12),
     });
+
+    return {
+      email: res.email,
+      name: res.name,
+    };
   }
 
   async login({ email, password }: LoginDto) {
-    const user = await this.usersService.findOneByEmail(email);
+    const user = await this.usersService.findOneByEmailWithPassword(email);
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
