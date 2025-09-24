@@ -5,6 +5,8 @@ import { LoginDto } from './dto/login.dto';
 import { Request } from 'express';
 import { Role } from '../common/enums/rol.enum';
 import { Auth } from './decorators/auth.decorator';
+import { ActiveUser } from 'src/common/decorators/active-user.decorator';
+import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 
 interface RequestWithUser extends Request {
   user: {
@@ -35,7 +37,7 @@ export class AuthController {
 
   @Get('profile')
   @Auth(Role.USER)
-  profile(@Req() req: RequestWithUser) {
-    return this.authService.profile(req.user);
+  profile(@ActiveUser() user: UserActiveInterface) {
+    return this.authService.profile(user);
   }
 }
