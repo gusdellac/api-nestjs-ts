@@ -17,6 +17,11 @@ RUN pnpm config set store-dir /usr/src/app/.pnpm-store
 # Instalar dependencias del proyecto
 RUN pnpm install
 
+# Establece la zona horaria America/Argentina/Cordoba
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/America/Argentina/Cordoba /etc/localtime && \
+    echo "America/Argentina/Cordoba" > /etc/timezone
+
 # Copiar el resto de la aplicación
 COPY . .
 
