@@ -5,25 +5,31 @@ import { BreedsModule } from './breeds/breeds.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 
-const host = process.env.MYSQL_HOST;
-const port = process.env.MYSQL_PORT
-  ? parseInt(process.env.MYSQL_PORT)
+const host = process.env.POSTGRES_HOST;
+const port = process.env.POSTGRES_PORT
+  ? parseInt(process.env.POSTGRES_PORT)
   : undefined;
-const user = process.env.MYSQL_USER;
-const password = process.env.MYSQL_PASSWORD;
-const database = process.env.MYSQL_DATABASE;
+const user = process.env.POSTGRES_USER;
+const password = process.env.POSTGRES_PASSWORD;
+const database = process.env.POSTGRES_DATABASE;
+const ssl = process.env.POSTGRES_SSL === 'true';
+const synchronize = process.env.POSTGRES_SYNCHRONIZE === 'true';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: host,
       port: port,
       username: user,
       password: password,
       database: database,
       autoLoadEntities: true,
-      synchronize: true, // no usar en produccion
+      synchronize: synchronize, // no usar en produccion
+      ssl: ssl,
+      extra: {
+        ssl: ssl ? { rejectUnauthorized: false } : null,
+      },
     }),
     BreedsModule,
     CatsModule,

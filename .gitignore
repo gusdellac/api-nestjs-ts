@@ -57,7 +57,7 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # db data
-dev_db_data/
+db_data/
 
 # pnpm data
 .pnpm-store/

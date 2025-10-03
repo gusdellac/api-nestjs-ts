@@ -1,17 +1,16 @@
 services:
-  mysql:
-    image: mysql:8.4
-    container_name: mysql_server
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_server
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-appdb}
-      MYSQL_USER: ${MYSQL_USER:-appuser}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-apppass} 
+      POSTGRES_DB: ${POSTGRES_DATABASE:-appdb}
+      POSTGRES_USER: ${POSTGRES_USER:-appuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-apppass} 
     ports:
-      - "${MYSQL_PORT_EXTERNAL:-3306}:3306"
+      - "${POSTGRES_PORT_EXTERNAL:-5432}:5432"
     volumes:
-      - ./dev_db_data:/var/lib/mysql
+      - ./db_data:/var/lib/postgresql/data
   nest-app:
     container_name: nestjs-dev
     build:
@@ -28,16 +27,17 @@ services:
     environment:
       NODE_ENV: development
       PORT: ${PORT:-3000}
-      MYSQL_HOST: ${MYSQL_HOST:-mysql}  
-      MYSQL_PORT: ${MYSQL_PORT:-3306}  
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-appdb}
-      MYSQL_USER: ${MYSQL_USER:-appuser}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-apppass}
+      POSTGRES_HOST: ${POSTGRES_HOST:-postgres}  
+      POSTGRES_PORT: ${POSTGRES_PORT:-5432}  
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE:-appdb}
+      POSTGRES_USER: ${POSTGRES_USER:-appuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-apppass}
+      POSTGRES_SSL: ${POSTGRES_SSL:-false}
+      POSTGRES_SYNCHRONIZE: ${POSTGRES_SYNCHRONIZE:-true}
       JWT_SECRET: ${JWT_SECRET:-yourSecretKey}
       # Variables para Docker dentro del contenedor
       DOCKER_HOST: unix:///var/run/docker.sock
     depends_on:
-      - mysql    
+      - postgres    
     # Agregar privilegios para acceder a Docker
     privileged: true

@@ -1,5 +1,5 @@
 {
-  "name": "NestJS + MySQL Dev",
+  "name": "NestJS + Postgres Dev",
   "dockerComposeFile": ["../docker-compose.dev.yml"],
   "service": "nest-app",
   "workspaceFolder": "/usr/src/app",
@@ -10,7 +10,7 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "firsttris.vscode-jest-runner",
-        "formulahendry.vscode-mysql",
+        "cweijan.vscode-postgresql-client2", 
         "mikestead.dotenv",
         "ms-azuretools.vscode-docker",
         "eamodio.gitlens",
@@ -33,7 +33,9 @@
   },
 
   "postCreateCommand": "pnpm install",
-  "forwardPorts": [3001, 3307],
+
+  // Utilizar valores de las .env para PORT y para POSTGRES_PORT_EXTERNAL
+  "forwardPorts": [3001, 5436],
   
   // configuraciones para git
   "mounts": [
