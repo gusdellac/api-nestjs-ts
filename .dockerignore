@@ -1,5 +1,5 @@
-# Ignorar datos de MySQL
-dev_db_data/
+# Ignorar datos de database local desarrollo
+db_data/
 
 # Ignorar node_modules
 node_modules/
