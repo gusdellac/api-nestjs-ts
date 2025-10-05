@@ -30,6 +30,8 @@ const synchronize = process.env.POSTGRES_SYNCHRONIZE === 'true';
       extra: {
         ssl: ssl ? { rejectUnauthorized: false } : null,
       },
+      migrationsRun: true, // ejecuta migraciones automáticamente en arranque
+      migrations: ['dist/migrations/*{.ts,.js}'], // carpeta donde estarán las migraciones compiladas
     }),
     BreedsModule,
     CatsModule,

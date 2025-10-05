@@ -23,6 +23,9 @@ export class User {
   @Column({ type: 'enum', default: Role.USER, enum: Role })
   role: Role;
 
+  @Column({ default: null })
+  testMigrations?: string;
+
   @DeleteDateColumn()
   deletedAt: Date;
 }
